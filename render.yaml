@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: patient-health-profile
+    env: static
+    buildCommand: bash render-build.sh
+    staticPublishPath: build/web
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
